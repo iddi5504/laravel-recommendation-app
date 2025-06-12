@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(Authentication::class)->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/recommendations', [Recommendation::class, 'index'])->name('recommendations.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::view('/recommendations/create', "pages.recommendation.create")->name('recommendations.create');
     Route::post('/recommendations', [Recommendation::class, 'store'])->name('recommendations.store');
     Route::get('/recommendations/{recommendation}', [Recommendation::class, 'show'])->name('recommendation.show');
+    Route::get('/recommendations/{recommendation}/edit', [Recommendation::class, 'edit'])->name('recommendation.edit');
+    Route::patch('/recommendations/{recommendation}', [Recommendation::class, 'update'])->name('recommendation.update');
     Route::view('/settings', 'pages.settings')->name('settings')->middleware(AdminMiddleware::class);
     Route::get('/recommendation/{recommendation}/comments', [CommentController::class, 'index'])->name('comment.index');
     Route::post('/recommendation/{recommendation}/comments', [CommentController::class, 'store'])->name('comment.store');

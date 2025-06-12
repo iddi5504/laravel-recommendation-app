@@ -11,6 +11,7 @@ class Recommendation extends Model
         'description',
         'title',
         'rating',
+        'imagePath',
         'user_id'
     ];
 

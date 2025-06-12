@@ -5,13 +5,9 @@
 <div class="max-w-3xl mx-auto py-10 px-4">
     {{-- Recommendation Card --}}
     <div class="bg-white shadow rounded-xl p-6 mb-8 relative">
-        <form class="absolute top-2 right-2" action="{{ route('recommendation.destroy', compact('recommendation')) }}" method="post">
-            @csrf
-            @method('DELETE')
-            <button type="submit">
-                <span class="mdi mdi-delete-empty text-red-500 text-lg cursor-pointer"></span>
-            </button>
-        </form>
+
+        <img src="{{ '/storage/' . $recommendation->imagePath }}" class="w-full h-80 object-contain mb-3" alt="">
+
 
         <h1 class="text-3xl font-bold mb-2">{{ $recommendation->title }}</h1>
         <p class="text-gray-600 mb-4">{{ $recommendation->description }}</p>
@@ -22,6 +18,28 @@
             <span><strong>Posted:</strong> {{ $recommendation->created_at }}</span>
         </div>
     </div>
+
+
+    @can(['update', 'delete'], $recommendation)
+    <div class="flex justify-start gap-4 bg-white rounded-xl p-5 shadow-lg mb-6">
+        <form class="" action="{{ route('recommendation.destroy', compact('recommendation')) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit">
+                <span class="mdi mdi-delete-empty text-red-500 text-lg cursor-pointer">Delete</span>
+            </button>
+
+        </form>
+        <form class="" action="{{ route('recommendation.edit', compact('recommendation')) }}" method="get">
+            @csrf
+            <button type="submit">
+                <span class="text-blue text-lg cursor-pointer">Edit</span>
+            </button>
+
+        </form>
+
+    </div>
+    @endcan
 
     {{-- Comment Section --}}
     <div class="bg-white shadow rounded-xl p-6">

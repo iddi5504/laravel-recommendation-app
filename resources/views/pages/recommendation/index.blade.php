@@ -23,6 +23,8 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($recommendations as $recommendation)
         <div class="bg-white shadow rounded-xl p-6 hover:shadow-lg transition">
+            <img src="{{ '/storage/' . $recommendation->imagePath }}" class="w-full h-60 object-cover" alt="">
+
             <a href="{{ route('recommendation.show', $recommendation) }}">
                 <h2 class="text-xl font-semibold mb-2">{{ $recommendation->title }}</h2>
             </a>
